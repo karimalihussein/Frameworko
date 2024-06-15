@@ -5,7 +5,7 @@ namespace App\Core;
 
 final class App 
 {
-    public function __construct()
+    public function run()
     {
         var_dump('App started');
     }
