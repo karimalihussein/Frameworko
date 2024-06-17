@@ -15,5 +15,7 @@
             "email": "karimalihussein99@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "spatie/ignition": "^1.15"
+    }
 }
