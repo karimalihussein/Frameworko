@@ -2,15 +2,24 @@
 
 // Require the Composer autoloader
 
-use Spatie\Ignition\Ignition;
+use App\Config\Config;
+use App\Core\Container;
+use App\Core\Exmaple;
+use League\Container\ReflectionContainer;
 
 error_reporting(0);
 
 require __DIR__ . '/../vendor/autoload.php';
 
 
-Ignition::make()->register();
+$container = Container::getInstance();
+$container->delegate(new ReflectionContainer());
+$container->addServiceProvider(new App\Providers\ConfigServiceProvider());
+$container->addServiceProvider(new App\Providers\AppServiceProvider());
 
+var_dump($container->get(Config::class)->get('app.name'));
+
+die;
 // Set Up the Application
 use App\Core\App;
 $app = new App();
