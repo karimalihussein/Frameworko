@@ -18,7 +18,7 @@ final class ConfigServiceProvider extends AbstractServiceProvider implements Boo
         $this->getContainer()->add(Config::class, function () {
             $config = new Config();
             return $this->mergeConfigFromFiles($config);
-        });
+        })->setShared(true);
     }
 
     public function provides(string $id): bool
