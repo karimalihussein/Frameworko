@@ -4,6 +4,7 @@
 
 use App\Config\Config;
 use App\Core\Container;
+use Laminas\Diactoros\Request;
 use League\Container\ReflectionContainer;
 
 error_reporting(0);
@@ -24,6 +25,13 @@ $config = $container->get(Config::class);
 foreach($config->get('app.providers') as $provider) {
     $container->addServiceProvider(new $provider());
 }
+
+$var = $container->get(Request::class)->getQueryParams();
+
+var_dump($var);
+
+
+die;
 
 use App\Core\App;
 $app = new App();
