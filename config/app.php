@@ -6,5 +6,6 @@ return [
     'providers' => [
         App\Providers\AppServiceProvider::class,
         App\Providers\RequestServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
     ],
 ];
