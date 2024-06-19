@@ -10,6 +10,9 @@ error_reporting(0);
 
 require __DIR__ . '/../vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
 
 $container = Container::getInstance();
 $container->delegate(new ReflectionContainer());
@@ -22,13 +25,9 @@ foreach($config->get('app.providers') as $provider) {
     $container->addServiceProvider(new $provider());
 }
 
-// Set Up the Application
 use App\Core\App;
 $app = new App();
 
 
-// Register the Application Services and Providers and Routes
 
-
-// Run the Application
 $app->run();
