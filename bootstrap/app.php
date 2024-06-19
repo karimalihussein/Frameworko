@@ -26,12 +26,6 @@ foreach($config->get('app.providers') as $provider) {
     $container->addServiceProvider(new $provider());
 }
 
-$var = $container->get(Request::class)->getQueryParams();
-
-var_dump($var);
-
-
-die;
 
 use App\Core\App;
 $app = new App();
