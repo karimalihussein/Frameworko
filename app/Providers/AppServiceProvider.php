@@ -12,7 +12,6 @@ final class AppServiceProvider extends AbstractServiceProvider implements Bootab
     public function boot(): void
     {
         Ignition::make()->register();
-        var_dump('booted');
     }
 
     public function register(): void
