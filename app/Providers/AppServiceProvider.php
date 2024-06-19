@@ -16,14 +16,11 @@ final class AppServiceProvider extends AbstractServiceProvider implements Bootab
 
     public function register(): void
     {
-        // $this->getContainer()->add(Exmaple::class, fn() => new Exmaple());
     }
 
     public function provides(string $id): bool
     {
-        $services = [
-            // Exmaple::class
-        ];
+        $services = [];
 
         return in_array($id, $services);
     }
