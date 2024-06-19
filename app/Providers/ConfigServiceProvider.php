@@ -3,10 +3,8 @@
 namespace App\Providers;
 
 use App\Config\Config;
-use App\Core\Exmaple;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
-use Spatie\Ignition\Ignition;
 
 final class ConfigServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
 {
