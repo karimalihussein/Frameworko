@@ -1,13 +1,12 @@
 <?php
+use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
+error_reporting(0);
 
-// Require the Composer autoloader
 
 use App\Config\Config;
 use App\Core\Container;
-use Laminas\Diactoros\Request;
 use League\Container\ReflectionContainer;
 
-error_reporting(0);
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -27,9 +26,23 @@ foreach($config->get('app.providers') as $provider) {
 }
 
 
+
+
 use App\Core\App;
+use Laminas\Diactoros\Request;
+use League\Route\Router;
+
 $app = new App();
 
+$router = $container->get(Router::class);
+$router->get('/', function() {
+   $response = new \Laminas\Diactoros\Response();
+    $response->getBody()->write('Hello World');
+    return $response;
+});
 
+$response = $router->dispatch($container->get(Request::class));
+
+(new SapiEmitter)->emit($response);
 
 $app->run();
