@@ -14,18 +14,21 @@ require __DIR__ . '/../vendor/autoload.php';
 $container = Container::getInstance();
 $container->delegate(new ReflectionContainer());
 $container->addServiceProvider(new App\Providers\ConfigServiceProvider());
-$container->addServiceProvider(new App\Providers\AppServiceProvider());
 
-var_dump($container->get(Config::class)->get('database.default'));
 
-die;
+$config = $container->get(Config::class);
+
+foreach($config->get('app.providers') as $provider) {
+    $container->addServiceProvider(new $provider());
+}
+
 // Set Up the Application
-// use App\Core\App;
-// $app = new App();
+use App\Core\App;
+$app = new App();
 
 
 // Register the Application Services and Providers and Routes
 
 
 // Run the Application
-// $app->run();
+$app->run();
