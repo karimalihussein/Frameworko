@@ -2,9 +2,8 @@
 
 return [
     'name' => 'Frameworko',
+    'debug' => true,
     'providers' => [
-        // App\Providers\ConfigServiceProvider::class,
         App\Providers\AppServiceProvider::class,
-        
     ],
 ];
