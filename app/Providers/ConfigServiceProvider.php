@@ -17,7 +17,10 @@ final class ConfigServiceProvider extends AbstractServiceProvider implements Boo
 
     public function register(): void
     {
-        $this->getContainer()->add(Config::class, fn() => new Config());
+        $this->getContainer()->add(Config::class, function () {
+            $config = new Config();
+            return $this->mergeConfigFromFiles($config);
+        });
     }
 
     public function provides(string $id): bool
@@ -26,5 +29,19 @@ final class ConfigServiceProvider extends AbstractServiceProvider implements Boo
             Config::class
         ];
         return in_array($id, $services);
+    }
+
+    protected function mergeConfigFromFiles(Config $config): Config
+    {
+       $path = __DIR__ . '/../../Config';
+       $files = scandir($path);
+       
+       foreach(array_diff($files, ['.', '..']) as $file) {
+           $config->merge(
+               [explode('.', $file)[0] => require $path . '/' . $file]
+           );
+       }
+
+      return $config;
     }
 }
