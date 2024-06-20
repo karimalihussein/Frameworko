@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Config\Config;
 use App\Views\View;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
