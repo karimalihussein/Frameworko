@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Config\Config;
 use App\Views\View;
+use Illuminate\Database\DatabaseManager;
 use Laminas\Diactoros\Request;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,7 +13,8 @@ final class HomeController
 {
     public function __construct(
         protected Config $config,
-        protected View $view
+        protected View $view,
+        protected DatabaseManager $db
     ){}
 
     public function __invoke(ServerRequestInterface $request): Response
@@ -20,13 +22,7 @@ final class HomeController
         $response = new Response();
         $response->getBody()->write($this->view->render('home', [
             'name' => $this->config->get('app.name'),
-            'users' =>
-            [
-                ['id' => 1, 'name' => 'John Doe'],
-                ['id' => 2, 'name' => 'Jane Doe'],
-                ['id' => 3, 'name' => 'Harry Potter'],
-                ['id' => 4, 'name' => 'Hermione Granger']
-            ]
+            'users' => $this->db->connection()->table('users')->get()
         ]));
         return $response;
     }
