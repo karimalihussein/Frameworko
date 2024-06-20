@@ -19,7 +19,14 @@ final class HomeController
     {
         $response = new Response();
         $response->getBody()->write($this->view->render('home', [
-            'name' => $this->config->get('app.name')
+            'name' => $this->config->get('app.name'),
+            'users' =>
+            [
+                ['id' => 1, 'name' => 'John Doe'],
+                ['id' => 2, 'name' => 'Jane Doe'],
+                ['id' => 3, 'name' => 'Harry Potter'],
+                ['id' => 4, 'name' => 'Hermione Granger']
+            ]
         ]));
         return $response;
     }
