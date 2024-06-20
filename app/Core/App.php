@@ -38,8 +38,7 @@ final class App
         try {
             $response = $this->router->dispatch($this->request);
         } catch (\Throwable $e) {
-            $response = new \Laminas\Diactoros\Response();
-            $response->getBody()->write('An error occurred');
+            throw $e;
         }
         (new \Laminas\HttpHandlerRunner\Emitter\SapiEmitter)->emit(
             $response
