@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto p-4 bg-white shadow-md rounded-lg">
+        <h2 class="text-3xl font-bold mb-4">User Profile</h2>
+        <p><strong>ID:</strong> {{ user.id }}</p>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <!-- Add more user details here -->
+    </div>
+{% endblock %}

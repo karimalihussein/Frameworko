@@ -3,22 +3,30 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-      <div class="overflow-x-auto">
-    <table class="min-w-full bg-white shadow-md rounded-lg">
-      <thead>
-      <tr>
-        <th class="py-3 px-6 bg-blue-600 text-white text-left uppercase text-sm">ID</th>
-        <th class="py-3 px-6 bg-blue-600 text-white text-left uppercase text-sm">Name</th>
-      </tr>
-      </thead>
-      <tbody>
-      {% for user in users %}
-        <tr class="border-b">
-          <td class="py-3 px-6 text-gray-700">{{ user.id }}</td>
-          <td class="py-3 px-6 text-gray-700">{{ user.name }}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-md rounded-lg">
+            <thead>
+                <tr>
+                    <th class="py-3 px-6 bg-blue-600 text-white text-left uppercase text-sm">ID</th>
+                    <th class="py-3 px-6 bg-blue-600 text-white text-left uppercase text-sm">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr class="border-b">
+                        <td class="py-3 px-6 text-gray-700">
+                            <a href="/users/{{ user.id }}" class="hover:underline">
+                                {{ user.id }}
+                            </a>
+                        </td>
+                        <td class="py-3 px-6 text-gray-700">
+                            <a href="/users/{{ user.id }}" class="hover:underline">
+                                {{ user.name }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
