@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>{% if block('title') is defined %}{{ block('title') }}  {% endif %}{{ siteName }}</title>
     {% include 'layouts/head.html.twig' %}
 </head>
 <body class="bg-gray-100 text-gray-800">
