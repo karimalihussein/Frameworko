@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Config\Config;
+use App\Models\User;
 use App\Views\View;
 use Illuminate\Database\DatabaseManager;
 use Laminas\Diactoros\Request;
@@ -14,7 +15,6 @@ final class HomeController
     public function __construct(
         protected Config $config,
         protected View $view,
-        protected DatabaseManager $db
     ){}
 
     public function __invoke(ServerRequestInterface $request): Response
@@ -22,7 +22,7 @@ final class HomeController
         $response = new Response();
         $response->getBody()->write($this->view->render('home', [
             'name' => $this->config->get('app.name'),
-            'users' => $this->db->connection()->table('users')->get()
+            'users' =>  User::get()
         ]));
         return $response;
     }
