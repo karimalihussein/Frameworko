@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'layouts/head.html.twig' %}
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-600 text-white p-4">
+       {% include 'layouts/header.html.twig' %}
+    </header>
+
+    <main class="container mx-auto p-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        {% include 'layouts/footer.html.twig' %}
+    </footer>
+</body>
+</html>
