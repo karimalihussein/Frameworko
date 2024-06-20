@@ -6,10 +6,5 @@ use Psr\Container\ContainerInterface;
 
 return static function(Router $router, ContainerInterface $container) {
     $router->map('GET', '/', \App\Http\Controllers\HomeController::class);
-
-    $router->map('GET', '/about', function() {
-        $response = new \Laminas\Diactoros\Response();
-        $response->getBody()->write('About');
-        return $response;
-    });
+    $router->map('GET', '/about', \App\Http\Controllers\AboutController::class);
 };
