@@ -13,7 +13,7 @@ final class LogoutController
         protected Sentinel $auth
     ){}
    
-    public function __invoke(ServerRequestInterface $request): Response
+    public function __invoke(): Response
     {
         $this->auth->logout();
         return new Response\RedirectResponse('/auth/login');
