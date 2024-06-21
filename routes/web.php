@@ -10,4 +10,6 @@ return static function(Router $router, ContainerInterface $container) {
     $router->map('GET', '/users/{user}', \App\Http\Controllers\UserController::class);
     $router->map('GET', '/auth/register', [\App\Http\Controllers\Auth\RegisterController::class, 'index']);
     $router->map('POST', '/auth/register', [\App\Http\Controllers\Auth\RegisterController::class, 'store']);
+    $router->map('GET', '/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index']);
+    $router->map('POST', '/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'store']);
 };
