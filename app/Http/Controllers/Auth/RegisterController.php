@@ -4,13 +4,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Views\View;
+use Cartalyst\Sentinel\Sentinel;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class RegisterController
 {
     public function __construct(
-        protected View $view
+        protected View $view,
+        protected Sentinel $auth
     ){}
     public function index(ServerRequestInterface $request): Response
     {
@@ -20,7 +22,12 @@ final class RegisterController
     }
 
     public function store(ServerRequestInterface $request)
-    {
-        dd($request->getParsedBody());die;
+    {        
+        if($user = $this->auth->registerAndActivate($request->getParsedBody()))
+        {
+            $this->auth->login($user);
+        }
+
+        return new Response\RedirectResponse('/');
     }
 }
