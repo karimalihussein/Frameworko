@@ -12,4 +12,5 @@ return static function(Router $router, ContainerInterface $container) {
     $router->map('POST', '/auth/register', [\App\Http\Controllers\Auth\RegisterController::class, 'store']);
     $router->map('GET', '/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index']);
     $router->map('POST', '/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'store']);
+    $router->map('POST', '/auth/logout', App\Http\Controllers\Auth\LogoutController::class);
 };
