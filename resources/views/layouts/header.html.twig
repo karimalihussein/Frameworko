@@ -4,7 +4,11 @@
         <ul class="flex space-x-4 items-center">
             {% if auth().check() %}
                 <li><a href="#" class="hover:underline">Home</a></li>
-                <li><a href="/auth/logout" class="hover:underline">Logout</a></li>
+                <li>
+                    <form action="/auth/logout" method="post">
+                        <button type="submit" class="hover:underline">Log out</button>
+                    </form>
+                </li>
                 <li class="text-gray-700">Hello, {{ auth().user().first_name }}</li>
             {% else %}
                 <li><a href="/auth/register" class="hover:underline">Register</a></li>
