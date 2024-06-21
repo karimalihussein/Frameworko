@@ -9,6 +9,7 @@ final class TwigExtension extends \Twig\Extension\AbstractExtension
     {
         return [
            new TwigFunction('config', [TwigRuntimeExtension::class, 'config']),
+           new TwigFunction('auth', [TwigRuntimeExtension::class, 'auth']),
         ];
     }
 }
