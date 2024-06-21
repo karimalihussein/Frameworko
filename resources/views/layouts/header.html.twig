@@ -1,9 +1,15 @@
- <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold"><a href="#">My App</a></h1>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="#" class="hover:underline">Home</a></li>
-                    <li><a href="/auth/register" class="hover:underline">Register</a></li>
-                </ul>
-            </nav>
+<div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold"><a href="#">Home</a></h1>
+    <nav>
+        <ul class="flex space-x-4 items-center">
+            {% if auth().check() %}
+                <li><a href="#" class="hover:underline">Home</a></li>
+                <li><a href="/auth/logout" class="hover:underline">Logout</a></li>
+                <li class="text-gray-700">Hello, {{ auth().user().first_name }}</li>
+            {% else %}
+                <li><a href="/auth/register" class="hover:underline">Register</a></li>
+                <li><a href="/auth/login" class="hover:underline">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
