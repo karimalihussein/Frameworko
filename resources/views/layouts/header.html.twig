@@ -6,6 +6,7 @@
                 <li><a href="#" class="hover:underline">Home</a></li>
                 <li>
                     <form action="/auth/logout" method="post">
+                        {{ csrf() | raw }}
                         <button type="submit" class="hover:underline">Log out</button>
                     </form>
                 </li>
