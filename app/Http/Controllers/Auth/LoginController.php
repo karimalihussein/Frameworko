@@ -20,10 +20,7 @@ final class LoginController
     public function index(ServerRequestInterface $request): Response
     {
         $response = new Response();
-        $response->getBody()->write($this->view->render('auth/login', [
-            'error' => $this->session->getFlashBag()->get('error'),
-            'success' => $this->session->getFlashBag()->get('success')
-        ]));
+        $response->getBody()->write($this->view->render('auth/login'));
         return $response;
     }
 
@@ -33,6 +30,7 @@ final class LoginController
 
         if (!$this->auth->authenticate($credentials)) {
             $this->session->getFlashBag()->add('error', 'Invalid login credentials.');
+
             return new RedirectResponse('/auth/login');
         }
 
