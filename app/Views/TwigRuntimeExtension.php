@@ -5,6 +5,7 @@ namespace App\Views;
 use App\Config\Config;
 use Cartalyst\Sentinel\Sentinel;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Twig\Extension\AbstractExtension;
 
 final class TwigRuntimeExtension extends AbstractExtension
@@ -25,5 +26,10 @@ final class TwigRuntimeExtension extends AbstractExtension
         $guard = $this->container->get('csrf');
         return '<input type="hidden" name="' . $guard->getTokenNameKey() . '" value="' . $guard->getTokenName() . '">
                 <input type="hidden" name="' . $guard->getTokenValueKey() . '" value="' . $guard->getTokenValue() . '">';
+    }
+
+    public function flash($key): string
+    {
+        return $this->container->get(Session::class)->getFlashBag()->get($key)[0] ?? '';
     }
 }
