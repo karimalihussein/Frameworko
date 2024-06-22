@@ -10,12 +10,14 @@ use Illuminate\Database\DatabaseManager;
 use Laminas\Diactoros\Request;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 final class HomeController
 {
     public function __construct(
         protected View $view,
         protected Sentinel $auth,
+        protected Session $session,
     ){}
 
     public function __invoke(ServerRequestInterface $request): Response
