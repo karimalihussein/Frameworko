@@ -11,5 +11,6 @@ return [
         App\Providers\DatabaseServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\CsrfServiceProvider::class,
+        App\Providers\SessionServiceProvider::class,
     ],
 ];
