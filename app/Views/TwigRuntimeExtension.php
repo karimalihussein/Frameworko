@@ -32,4 +32,9 @@ final class TwigRuntimeExtension extends AbstractExtension
     {
         return $this->container->get(Session::class)->getFlashBag()->get($key)[0] ?? '';
     }
+
+    public function session(): Session
+    {
+        return $this->container->get(Session::class);
+    }
 }
