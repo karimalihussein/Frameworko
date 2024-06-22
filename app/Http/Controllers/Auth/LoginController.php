@@ -8,6 +8,7 @@ use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Respect\Validation\Validator as v;
 
 final class LoginController
 {
@@ -26,14 +27,25 @@ final class LoginController
 
     public function store(ServerRequestInterface $request): Response
     {
-        $credentials = $request->getParsedBody();
-
-        if (!$this->auth->authenticate($credentials)) {
-            $this->session->getFlashBag()->add('error', 'Invalid login credentials.');
-
+        $errorMessage = 'Invalid login credentials.';
+    
+        try {
+            v::key('email', v::email())
+                ->key('password', v::stringType()->notEmpty())
+                ->assert($request->getParsedBody());
+        } catch (\Respect\Validation\Exceptions\ValidationException $e) {
+            $this->session->getFlashBag()->add('error', $errorMessage);
             return new RedirectResponse('/auth/login');
         }
-
+    
+        $credentials = $request->getParsedBody();
+    
+        if (!$this->auth->authenticate($credentials)) {
+            $this->session->getFlashBag()->add('error', $errorMessage);
+            return new RedirectResponse('/auth/login');
+        }
+    
         return new RedirectResponse('/');
     }
+    
 }
