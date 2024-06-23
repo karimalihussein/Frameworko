@@ -31,7 +31,7 @@ final class RegisterController
         try {
             v::key('first_name', v::stringType()->notEmpty())
                 ->key('last_name', v::stringType()->notEmpty())
-                ->key('email', v::email())
+                ->key('email', v::email()->notEmpty()->email()->not(v::existsInDatabase('users', 'email')))
                 ->key('password', v::stringType()->notEmpty())
                 ->keyValue('password_confirmation', 'equals', 'password')
                 ->assert($request->getParsedBody());
