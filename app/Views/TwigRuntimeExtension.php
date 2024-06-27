@@ -4,23 +4,38 @@ namespace App\Views;
 
 use App\Config\Config;
 use Cartalyst\Sentinel\Sentinel;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Twig\Extension\AbstractExtension;
 
 final class TwigRuntimeExtension extends AbstractExtension
 {
     public function __construct(protected ContainerInterface $container){}
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function config(): Config
     {
         return $this->container->get(Config::class);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function auth(): Sentinel
     {
         return $this->container->get(Sentinel::class);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function csrf(): string
     {
         $guard = $this->container->get('csrf');
@@ -28,13 +43,32 @@ final class TwigRuntimeExtension extends AbstractExtension
                 <input type="hidden" name="' . $guard->getTokenValueKey() . '" value="' . $guard->getTokenValue() . '">';
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function flash($key): string
     {
         return $this->container->get(Session::class)->getFlashBag()->get($key)[0] ?? '';
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function session(): Session
     {
         return $this->container->get(Session::class);
     }
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function old(string $key): ?string
+    {
+        return $this->session()->getFlashBag()->peek('old')[$key] ?? null;
+    }
+
+
 }
