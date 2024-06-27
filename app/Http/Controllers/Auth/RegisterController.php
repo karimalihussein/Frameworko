@@ -53,7 +53,7 @@ final class RegisterController
         {
             $this->auth->login($user);
         }
-
+        $this->session->getFlashBag()->add('success', 'You are now registered and logged in, welcome!');
         return new Response\RedirectResponse('/');
     }
 }
