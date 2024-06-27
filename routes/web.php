@@ -8,6 +8,7 @@ use Psr\Container\ContainerInterface;
 return static function(Router $router, ContainerInterface $container) {
 
     $router->middleware($container->get('csrf'));
+    $router->middleware(new \App\Http\Middleware\FlashOldDataMiddleware());
 
     $router->group('/auth', function (RouteGroup $route) {
         $route->map('GET', '/register', [\App\Http\Controllers\Auth\RegisterController::class, 'index']);
