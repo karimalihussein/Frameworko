@@ -12,7 +12,8 @@ final class TwigExtension extends \Twig\Extension\AbstractExtension
            new TwigFunction('auth', [TwigRuntimeExtension::class, 'auth']),
            new TwigFunction('csrf', [TwigRuntimeExtension::class, 'csrf']),
            new TwigFunction('flash', [TwigRuntimeExtension::class, 'flash']),
-           new TwigFunction('session', [TwigRuntimeExtension::class, 'session'])
+           new TwigFunction('session', [TwigRuntimeExtension::class, 'session']),
+           new TwigFunction('old', [TwigRuntimeExtension::class, 'old']),
         ];
     }
 }
