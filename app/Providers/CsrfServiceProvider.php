@@ -17,7 +17,11 @@ final class CsrfServiceProvider extends AbstractServiceProvider implements Boota
     public function register(): void
     {
         $this->getContainer()->add('csrf', function() {
-            return new Guard(new ResponseFactory());
+            $guard = new Guard(new ResponseFactory());
+            $guard->setFailureHandler(function(){
+                throw new \App\Validation\Exceptions\CsrfTokenException();
+            });
+            return $guard;
          })->setShared(true);
     }
 
