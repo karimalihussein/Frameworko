@@ -34,6 +34,7 @@ final class ExceptionHandler
     {
         return match (get_class($exception)) {
             \League\Route\Http\Exception\NotFoundException::class => 'errors/404',
+            \App\Validation\Exceptions\CsrfTokenException::class => 'errors/403',
             default => 'errors/500',
         };
     }
