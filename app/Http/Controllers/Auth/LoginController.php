@@ -44,7 +44,7 @@ final class LoginController
             $this->session->getFlashBag()->add('error', $errorMessage);
             return new RedirectResponse('/auth/login');
         }
-    
+        $this->session->getFlashBag()->add('success', 'You are now logged in.');
         return new RedirectResponse('/');
     }
     
