@@ -19,8 +19,8 @@ return static function(Router $router, ContainerInterface $container) {
 
     $router->group('/', function (RouteGroup $route) {
         $route->map('GET', '/', \App\Http\Controllers\HomeController::class);
-        $route->map('GET', '/about', \App\Http\Controllers\AboutController::class);
-        $route->map('GET', '/users/{user}', \App\Http\Controllers\UserController::class);
         $route->map('POST', '/auth/logout', \App\Http\Controllers\Auth\LogoutController::class);
     })->middleware(new \App\Http\Middleware\RedirectIfGuestMiddleware());
+
+    
 };
