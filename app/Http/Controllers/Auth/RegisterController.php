@@ -9,6 +9,9 @@ use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Validator as v;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 final class RegisterController
 {
@@ -17,6 +20,12 @@ final class RegisterController
         protected Sentinel $auth,
         protected Session $session
     ){}
+
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
     public function index(ServerRequestInterface $request): Response
     {
         $response = new Response();
@@ -26,7 +35,7 @@ final class RegisterController
         return $response;
     }
 
-    public function store(ServerRequestInterface $request)
+    public function store(ServerRequestInterface $request): Response\RedirectResponse
     {        
         try {
             v::key('first_name', v::stringType()->notEmpty())
