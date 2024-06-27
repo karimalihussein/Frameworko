@@ -21,4 +21,9 @@ final class View
     {
         return $this->twig->render($view . '.twig', $data);
     }
+
+    public function exists(string $view): bool
+    {
+        return $this->twig->getLoader()->exists($view . '.twig');
+    }
 }
