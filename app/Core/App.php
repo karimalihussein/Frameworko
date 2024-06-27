@@ -38,7 +38,7 @@ final class App
         try {
             $response = $this->router->dispatch($this->request);
         } catch (\Throwable $e) {
-            throw $e;
+            $response = $this->container->get(\App\Exceptions\ExceptionHandler::class)->handle($this->request, $response, $e);
         }
         (new \Laminas\HttpHandlerRunner\Emitter\SapiEmitter)->emit(
             $response
