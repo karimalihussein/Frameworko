@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Views\View;
 use Illuminate\Pagination\Paginator;
 use Laminas\Diactoros\Request;
 use League\Container\ServiceProvider\AbstractServiceProvider;
@@ -22,6 +23,12 @@ final class PaginationServiceProvider extends AbstractServiceProvider implements
         Paginator::currentPageResolver(function ($pageName = 'page') {
             return $this->getContainer()->get(Request::class)->getQueryParams()[$pageName] ?? 1;
         });
+
+        Paginator::viewFactoryResolver(function () {
+            return $this->getContainer()->get(View::class);
+        });
+
+        Paginator::defaultView('pagination/default');
     }
 
     public function register(): void
