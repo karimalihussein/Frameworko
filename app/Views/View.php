@@ -33,4 +33,9 @@ final class View
     {
         return $this->twig->getLoader()->exists($view . '.twig');
     }
+
+    public function make(string $view, array $data = []): void
+    {
+        echo $this->render($view, $data);
+    }
 }
