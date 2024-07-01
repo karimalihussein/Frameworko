@@ -12,6 +12,15 @@
                 </tr>
             </thead>
             <tbody>
+
+                {% if users is empty %}
+                    <tr>
+                        <td class="py-3 px-6 text-gray-700" colspan="2">
+                            No users found.
+                        </td>
+                    </tr>
+                {% else %}
+
                 {% for user in users %}
                     <tr class="border-b">
                         <td class="py-3 px-6 text-gray-700">
@@ -25,7 +34,11 @@
                             </a>
                         </td>
                     </tr>
+
+                        {{ users.links() }}
+                    
                 {% endfor %}
+                {% endif %}
             </tbody>
         </table>
     </div>
