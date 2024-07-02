@@ -22,3 +22,8 @@ function config(string $key, $default = null)
 {
     return app(\App\Config\Config::class)->get($key, $default);
 }
+
+function route(string $name, array $params = [])
+{
+    return app(\League\Route\Router::class)->getNamedRoute($name)->getPath($params);
+}
