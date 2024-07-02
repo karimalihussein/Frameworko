@@ -24,7 +24,7 @@
                 {% for user in users %}
                     <tr class="border-b">
                         <td class="py-3 px-6 text-gray-700">
-                            <a href="/users/{{ user.id }}" class="hover:underline">
+                            <a href="{{ route('users.show', { 'user': user.id }) }}" class="hover:underline">
                                 {{ user.id }}
                             </a>
                         </td>
