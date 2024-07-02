@@ -19,11 +19,10 @@ final class ViewServiceProvider extends AbstractServiceProvider implements Boota
     {
         $this->getContainer()->add(View::class, function(){
             $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../../resources/views');
-            $isDebugEnabled = $this->getContainer()->get(Config::class)->get('app.debug');
             
             $twig = new \Twig\Environment($loader, [
                 'cache' => false,
-                'debug' => $isDebugEnabled
+                'debug' => config('app.debug'),
             ]);
 
             $twig->addRuntimeLoader(new TwigRuntimeLoader($this->getContainer()));
