@@ -14,6 +14,7 @@ final class TwigExtension extends \Twig\Extension\AbstractExtension
            new TwigFunction('flash', [TwigRuntimeExtension::class, 'flash']),
            new TwigFunction('session', [TwigRuntimeExtension::class, 'session']),
            new TwigFunction('old', [TwigRuntimeExtension::class, 'old']),
+           new TwigFunction('route', [TwigRuntimeExtension::class, 'route']),
         ];
     }
 }
