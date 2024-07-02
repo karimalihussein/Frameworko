@@ -17,3 +17,8 @@ function view(string $view, array $data = [])
     );
     return $response;
 }
+
+function config(string $key, $default = null)
+{
+    return app(\App\Config\Config::class)->get($key, $default);
+}
