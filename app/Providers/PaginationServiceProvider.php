@@ -13,19 +13,19 @@ final class PaginationServiceProvider extends AbstractServiceProvider implements
     public function boot(): void
     {
         Paginator::currentPathResolver(function () {
-            return (string) strtok($this->getContainer()->get(Request::class)->getUri(), '?');
+            return (string) strtok(app(Request::class)->getUri(), '?');
         });
 
         Paginator::queryStringResolver(function () {
-            return $this->getContainer()->get(Request::class)->getQueryParams();
+            return app(Request::class)->getQueryParams();
         });
 
         Paginator::currentPageResolver(function ($pageName = 'page') {
-            return $this->getContainer()->get(Request::class)->getQueryParams()[$pageName] ?? 1;
+            return app(Request::class)->getQueryParams()[$pageName] ?? 1;
         });
 
         Paginator::viewFactoryResolver(function () {
-            return $this->getContainer()->get(View::class);
+            return app(View::class);
         });
 
         Paginator::defaultView('pagination/default');
