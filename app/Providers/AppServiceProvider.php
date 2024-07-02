@@ -12,7 +12,7 @@ final class AppServiceProvider extends AbstractServiceProvider implements Bootab
 {
     public function boot(): void
     {
-        if(app(Config::class)->get('app.debug')) {
+        if(config('app.debug')) {
             Ignition::make()->register();
         }
 
