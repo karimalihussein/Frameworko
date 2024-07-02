@@ -13,12 +13,8 @@ final class HomeController
 
     public function __invoke(): Response
     {
-        $response = new Response();
-        $response->getBody()->write(
-            view('home', [
-                'users' =>  User::get()
-            ])
-        );
-        return $response;
+        return view('home', [
+            'users' =>  User::get()
+        ]);
     }
 }
