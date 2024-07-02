@@ -20,7 +20,7 @@ final class TwigRuntimeExtension extends AbstractExtension
      */
     public function config(): Config
     {
-        return $this->container->get(Config::class);
+        return app(Config::class);
     }
 
     /**
@@ -29,7 +29,7 @@ final class TwigRuntimeExtension extends AbstractExtension
      */
     public function auth(): Sentinel
     {
-        return $this->container->get(Sentinel::class);
+        return app(Sentinel::class);
     }
 
     /**
@@ -49,7 +49,7 @@ final class TwigRuntimeExtension extends AbstractExtension
      */
     public function flash($key): string
     {
-        return $this->container->get(Session::class)->getFlashBag()->get($key)[0] ?? '';
+        return app(Session::class)->getFlashBag()->get($key)[0] ?? '';
     }
 
     /**
@@ -58,7 +58,7 @@ final class TwigRuntimeExtension extends AbstractExtension
      */
     public function session(): Session
     {
-        return $this->container->get(Session::class);
+        return app(Session::class);
     }
 
     /**
@@ -70,5 +70,9 @@ final class TwigRuntimeExtension extends AbstractExtension
         return $this->session()->getFlashBag()->peek('old')[$key] ?? null;
     }
 
+    public function route(string $name, array $parameters = []): string
+    {
+        return route($name, $parameters);
+    }
 
 }
