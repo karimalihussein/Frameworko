@@ -18,10 +18,10 @@ return static function(Router $router, ContainerInterface $container) {
     })->middleware(new \App\Http\Middleware\RedirectIfAuthenticatedMiddleware());
 
     $router->group('/', function (RouteGroup $route) {
-        $route->map('GET', '/', \App\Http\Controllers\HomeController::class);
-        $route->map('GET', '/users', [\App\Http\Controllers\UserController::class, 'index']);
+        $route->map('GET', '/', \App\Http\Controllers\HomeController::class)->setName('home');
+        $route->map('GET', '/users', [\App\Http\Controllers\UserController::class, 'index'])->setName('users');
         $route->map('GET', '/users/{user}', [\App\Http\Controllers\UserController::class, 'show']);
-        $route->map('POST', '/auth/logout', \App\Http\Controllers\Auth\LogoutController::class);
+        $route->map('POST', '/auth/logout', \App\Http\Controllers\Auth\LogoutController::class)->setName('logout');
     })->middleware(new \App\Http\Middleware\RedirectIfGuestMiddleware());
 
     
