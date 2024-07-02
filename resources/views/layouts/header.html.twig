@@ -1,19 +1,20 @@
 <div class="container mx-auto flex justify-between items-center">
-    <h1 class="text-2xl font-bold"><a href="/">Home</a></h1>
+    <h1 class="text-2xl font-bold"><a href="{{ route('home') }}">Home</a></h1>
     <nav>
         <ul class="flex space-x-4 items-center">
             {% if auth().check() %}
-                <li><a href="/" class="hover:underline">Home</a></li>
+                <li><a href="{{ route('home') }}" class="hover:underline">Home</a></li>
+                <li><a href="{{ route('users') }}" class="hover:underline">Users</a></li>
                 <li>
-                    <form action="/auth/logout" method="post">
+                    <form action="{{ route('logout') }}" method="post">
                         {{ csrf() | raw }}
                         <button type="submit" class="hover:underline">Log out</button>
                     </form>
                 </li>
                 <li class="text-gray-700">Hello, {{ auth().user().first_name }}</li>
             {% else %}
-                <li><a href="/auth/register" class="hover:underline">Register</a></li>
-                <li><a href="/auth/login" class="hover:underline">Login</a></li>
+                <li><a href="{{ route('register') }}" class="hover:underline">Register</a></li>
+                <li><a href="{{ route('login') }}" class="hover:underline">Login</a></li>
             {% endif %}
         </ul>
     </nav>
