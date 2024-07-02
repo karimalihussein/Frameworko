@@ -2,6 +2,7 @@
 
 use App\Core\Container;
 use App\Views\View;
+use Laminas\Diactoros\Response;
 
 function app(string $abstract)
 {
@@ -10,5 +11,9 @@ function app(string $abstract)
 
 function view(string $view, array $data = [])
 {
-    return app(View::class)->render($view, $data);
+    $response = new Response();
+    $response->getBody()->write(
+        app(View::class)->render($view, $data)
+    );
+    return $response;
 }
